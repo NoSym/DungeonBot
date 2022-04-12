@@ -9,7 +9,7 @@ export class CustomClient extends Client {
     constructor(options: ClientOptions) {
         super(options)
         this.commands = new Collection()
-        this.handleEvents
+        this.handleEvents()
         this.loadCommands()
     }
 
