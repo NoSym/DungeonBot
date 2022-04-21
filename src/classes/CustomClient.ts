@@ -14,7 +14,7 @@ export class CustomClient extends Client {
     }
 
     private handleEvents() {
-        const eventFiles = fs.readdirSync(`${__dirname}/../events`).filter(file => file.endsWith('.js'))
+        const eventFiles = fs.readdirSync(`${__dirname}/../events`).filter(file => file.endsWith('.ts'))
 
         for (const file of eventFiles) {
             const event: DiscordEvent = require(`${__dirname}/../events/${file}`).default
@@ -29,7 +29,7 @@ export class CustomClient extends Client {
     }
 
     private loadCommands() {
-        const commandFiles = fs.readdirSync(`${__dirname}/../commands`).filter(file => file.endsWith('.js'))
+        const commandFiles = fs.readdirSync(`${__dirname}/../commands`).filter(file => file.endsWith('.ts'))
 
         for (const file of commandFiles) {
             const command: CustomCommand = require(`${__dirname}/../commands/${file}`).default

@@ -6,10 +6,10 @@ const dotenv = require('dotenv')
 dotenv.config();
 
 const commands = []
-const commandFiles = fs.readdirSync(`${__dirname}/../prod/commands`).filter(file => file.endsWith('.js'))
+const commandFiles = fs.readdirSync(`${__dirname}/../src/commands`).filter((file: string) => file.endsWith('.js'))
 
 for (const file of commandFiles) {
-    const command = require(`${__dirname}/../prod/commands/${file}`).default
+    const command = require(`${__dirname}/../src/commands/${file}`).default
     commands.push(command.data.toJSON())
 }
 
