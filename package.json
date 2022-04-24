@@ -4,8 +4,9 @@
   "description": "",
   "main": "./src/index.ts",
   "scripts": {
-    "deploy-cmd": "ts-node ./scripts/deploy-commands.ts",
-    "start": "ts-node ./src/index.ts",
+    "deploy-test": "ts-node ./scripts/deploy-commands.js test",
+    "deploy-prod": "ts-node ./scripts/deploy-commands.js prod",
+    "start": "ts-node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
