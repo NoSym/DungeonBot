@@ -1,13 +1,13 @@
 const fs = require('node:fs')
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
+const { REST } = require('@discordjs/rest')
+const { Routes } = require('discord-api-types/v9')
 const dotenv = require('dotenv')
 
-dotenv.config();
+dotenv.config()
 
 const commands = []
 const commandFiles = fs.readdirSync(`${__dirname}/../src/commands`).filter((file) => file.endsWith('.ts'))
-const environment = process.argv.length > 0 ? process.argv[0] : 'test'
+const environment = process.argv.length > 2 ? process.argv[2] : 'test'
 
 for (const file of commandFiles) {
     const command = require(`${__dirname}/../src/commands/${file}`).default
@@ -22,7 +22,7 @@ if (environment === 'test') {
     .then(() => console.log('Successfully registered guild application commands.'))
     .catch(console.error)
 } else if (environment === 'prod') {
-    rest.put(Routes.applicationCommands(process.env.DISCORD_CLIENT_ID, process.env.TEST_GUILD_ID), { body: commands })
+    rest.put(Routes.applicationCommands(process.env.DISCORD_CLIENT_ID), { body: commands })
     .then(() => console.log('Successfully registered global application commands.'))
     .catch(console.error)
 }
