@@ -1,4 +1,4 @@
-import { Client, ClientOptions, Collection } from 'discord.js'
+import { ApplicationCommandPermissionData, Client, ClientOptions, Collection } from 'discord.js'
 import fs from 'node:fs'
 import { CustomCommand } from '../types/CustomCommand'
 import { DiscordEvent } from '../types/DiscordEvent'
@@ -8,6 +8,14 @@ export class CustomClient extends Client {
     commands: Collection<string, CustomCommand>
     menus: Collection<string, SelectMenu>
 
+    adminPermission: ApplicationCommandPermissionData[] = [
+        {
+            id: process.env.ADMIN_USER_ID ?? '',
+            type: 'USER',
+            permission: true
+        }
+    ]
+
     constructor(options: ClientOptions) {
         super(options)
         this.commands = new Collection()
@@ -15,6 +23,12 @@ export class CustomClient extends Client {
         this.handleEvents()
         this.loadCommands()
         this.loadMenus()
+
+        this.guilds.cache.forEach(async guild => {
+            const commands = await guild.commands.fetch()
+            commands.forEach((command) => 
+                command.permissions.set({ permissions: this.adminPermission }))
+        })
     }
 
     private handleEvents() {

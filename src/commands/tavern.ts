@@ -12,11 +12,11 @@ const execute = async (interaction: CommandInteraction) => {
     await interaction.reply({content: 'This message has all your random tavern info', components: [row] })
 }
 
-const ping: CustomCommand = {
+const tavern: CustomCommand = {
     data: new SlashCommandBuilder()
         .setName('tavern')
         .setDescription('Create a random tavern'),
     execute
 }
 
-export default ping
+export default tavern
