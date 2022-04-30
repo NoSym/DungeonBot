@@ -9,8 +9,11 @@ const handleCommand = async (interaction: CommandInteraction) => {
     const command = client.commands.get(interaction.commandName)
 
     if (!command) return
+
+    const optionMsg = `${interaction.options.data.length > 0 ? ' with options: '
+        + JSON.stringify(interaction.options.data) : ''}`
     
-    console.log(`${interaction.user.tag} in #${interaction.channel?.name} triggered ${command.data.name}`);
+    console.log(`${interaction.user.tag} in #${interaction.channel?.name} triggered ${command.data.name}${optionMsg}`);
 
     try {
         await command.execute(interaction)
