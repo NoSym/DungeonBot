@@ -6,6 +6,8 @@
   "scripts": {
     "deploy-test": "ts-node ./scripts/deploy-commands.js test",
     "deploy-prod": "ts-node ./scripts/deploy-commands.js prod",
+    "reset-test": "ts-node ./scripts/delete-commands.js prod",
+    "reset-prod": "ts-node ./scripts/delete-commands.js prod",
     "start": "ts-node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
