@@ -12,7 +12,9 @@ const environment = process.argv.length > 2 ? process.argv[2] : 'test'
 for (const file of commandFiles) {
     const command = require(`${__dirname}/../src/commands/${file}`).default
     
-    commands.push(command.data.toJSON())
+    if (command.enabled) {
+        commands.push(command.data.toJSON())
+    }
 }
 
 const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN)

@@ -105,6 +105,7 @@ const price: CustomCommand = {
         .addBooleanOption(option =>
             option.setName(CONSUMABLE)
                 .setDescription('Is item consumable, like a scroll or potion?')),
+    enabled: true,
     execute
 }
 

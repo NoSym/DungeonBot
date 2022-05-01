@@ -49,6 +49,7 @@ const roll: CustomCommand = {
         .addStringOption(option => 
             option.setName(ROLL_LABEL)
                 .setDescription('What are you rolling for?')),
+    enabled: true,
     execute
 }
 

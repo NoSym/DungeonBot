@@ -16,6 +16,7 @@ const tavern: CustomCommand = {
     data: new SlashCommandBuilder()
         .setName('tavern')
         .setDescription('Create a random tavern'),
+    enabled: false,
     execute
 }
 
