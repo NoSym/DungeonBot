@@ -6,7 +6,7 @@
   "scripts": {
     "deploy-test": "ts-node ./scripts/deploy-commands.js test",
     "deploy-prod": "ts-node ./scripts/deploy-commands.js prod",
-    "start": "ts-node .",
+    "start": "ts-node . > out.log 2> error.log",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
