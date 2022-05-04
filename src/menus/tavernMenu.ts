@@ -2,7 +2,7 @@ import { MessageSelectMenu, SelectMenuInteraction } from 'discord.js'
 import { SelectMenu } from '../types/SelectMenu'
 
 const name = 'tavernMenu'
-const menu = new MessageSelectMenu()
+const getMenu = () => new MessageSelectMenu()
     .setCustomId(name)
     .setPlaceholder('Nothing selected')
     .addOptions([
@@ -23,7 +23,7 @@ const handleSelection = async (interaction: SelectMenuInteraction) => {
 
 const tavernMenu: SelectMenu = {
     name,
-    menu,
+    getMenu,
     handleSelection
 }
 

@@ -6,7 +6,7 @@ import tavernMenu from "../menus/tavernMenu";
 const execute = async (interaction: CommandInteraction) => {
     const row = new MessageActionRow()
         .addComponents(
-            tavernMenu.menu
+            tavernMenu.getMenu()
         )
         
     await interaction.reply({content: 'This message has all your random tavern info', components: [row] })
