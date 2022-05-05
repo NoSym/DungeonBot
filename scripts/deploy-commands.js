@@ -12,10 +12,13 @@ const commands = []
 const commandFiles = fs.readdirSync(`${__dirname}/../src/commands`).filter((file) => file.endsWith('.ts'))
 const environment = process.argv.length > 2 ? process.argv[2] : ENV_TEST
 
+console.log('Registering commands...')
+
 for (const file of commandFiles) {
     const command = require(`${__dirname}/../src/commands/${file}`).default
     
     if (command.enabled || environment === ENV_TEST) {
+        console.log(file)
         commands.push(command.data.toJSON())
     }
 }

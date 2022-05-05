@@ -1,6 +1,7 @@
 import { CustomCommand } from "../types/CustomCommand"
 import { CommandInteraction, MessageEmbed } from 'discord.js';
 import { SlashCommandBuilder } from '@discordjs/builders';
+import { rollDie } from '../utils/util'
 
 const NUMBER_DICE = 'dice'
 const NUMBER_SIDES = 'sides'
@@ -16,7 +17,7 @@ const execute = async (interaction: CommandInteraction) => {
     const results: number[] = []
 
     for (let i = 0; i < numberOfDice; i++) {
-        results.push(Math.floor(Math.random() * (numberOfSides + 1)) + 1)
+        results.push(rollDie(numberOfSides))
     }
 
     const sum = results.reduce((x1, x2) => x1 + x2) + (bonusModifier ?? 0)

@@ -6,9 +6,7 @@ import { CustomClient } from "../classes/CustomClient";
 
 const execute = async (interaction:CommandInteraction) => {
     const row = new MessageActionRow()
-        .addComponents(
-            helpMenu.getMenu(interaction.client as CustomClient)
-        )
+        .addComponents(helpMenu.getMenu(interaction.client as CustomClient))
         
     await interaction.reply({content: 'Select a command', components: [row] })
 }

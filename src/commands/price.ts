@@ -23,25 +23,25 @@ type PriceRange = {
 }
 
 const getPriceRange = (itemRarity: string): PriceRange => {
-    if (itemRarity === RARITY_COMMON) return { start: 50, end: 100 }
-    if (itemRarity === RARITY_UNCOMMON) return { start: 101, end: 500 }
-    if (itemRarity === RARITY_RARE) return { start: 501, end: 5000 }
-    if (itemRarity === RARITY_VERYRARE) return { start: 5001, end: 50000 }
+    if (itemRarity == RARITY_COMMON) return { start: 50, end: 100 }
+    if (itemRarity == RARITY_UNCOMMON) return { start: 101, end: 500 }
+    if (itemRarity == RARITY_RARE) return { start: 501, end: 5000 }
+    if (itemRarity == RARITY_VERYRARE) return { start: 5001, end: 50000 }
     return { start: 50001, end: 500000 }
 }
 
 const getTieredPriceRange = (priceRange: PriceRange, itemTier?: string): PriceRange => {
     const totalRange = priceRange.end - priceRange.start
 
-    if (itemTier === TIER_LOW) return { 
+    if (itemTier == TIER_LOW) return { 
         start: priceRange.start, 
         end: priceRange.end - Math.floor(totalRange * .67) 
     }
-    if (itemTier === TIER_MEDIUM) return {
+    if (itemTier == TIER_MEDIUM) return {
         start: priceRange.start + Math.floor(totalRange * .33),
         end: priceRange.end - Math.floor(totalRange * .33)
     }
-    if (itemTier === TIER_HIGH) return {
+    if (itemTier == TIER_HIGH) return {
         start: priceRange.start + Math.floor(totalRange * .67),
         end: priceRange.end
     }

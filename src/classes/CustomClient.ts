@@ -3,8 +3,10 @@ import fs from 'node:fs'
 import { CustomCommand } from '../types/CustomCommand'
 import { DiscordEvent } from '../types/DiscordEvent'
 import { SelectMenu } from '../types/SelectMenu'
+import { Button } from '../types/Button'
 
 export class CustomClient extends Client {
+    buttons: Collection<string, Button>
     commands: Collection<string, CustomCommand>
     menus: Collection<string, SelectMenu>
 
@@ -18,9 +20,11 @@ export class CustomClient extends Client {
 
     constructor(options: ClientOptions) {
         super(options)
+        this.buttons = new Collection()
         this.commands = new Collection()
         this.menus = new Collection()
         this.handleEvents()
+        this.loadButtons()
         this.loadCommands()
         this.loadMenus()
 
@@ -44,6 +48,16 @@ export class CustomClient extends Client {
                 this.on(event.name, (...args) => event.execute(...args))
             }
         }        
+    }
+
+    private loadButtons() {
+        const buttonFiles = fs.readdirSync(`${__dirname}/../buttons`).filter(file => file.endsWith('.ts'))
+
+        for (const file of buttonFiles) {
+            const button: Button = require(`${__dirname}/../buttons/${file}`).default
+
+            this.buttons.set(button.name, button)
+        }
     }
 
     private loadCommands() {
