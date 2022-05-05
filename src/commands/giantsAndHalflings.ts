@@ -6,7 +6,7 @@ import { WAGER } from '../utils/constants'
 import { processRound } from "../utils/giantsAndHalflings";
 
 const execute = async (interaction: CommandInteraction) => {
-    const player = interaction.user.tag
+    const player = interaction.user
     const wager = interaction.options.getNumber(WAGER, true)
     const knee = rollDie(10)
     const halfling1 = rollDie(6)
@@ -14,7 +14,7 @@ const execute = async (interaction: CommandInteraction) => {
 
     await interaction.reply(`The Knee is ${knee}...`)
 
-    await processRound(interaction, player, wager, knee, halfling1, halfling2)
+    await processRound(interaction, player.toString(), wager, knee, halfling1, halfling2)
 }
 
 const giantsAndHalflings: CustomCommand = {

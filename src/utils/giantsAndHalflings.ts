@@ -1,7 +1,7 @@
 import { ButtonInteraction, CommandInteraction, MessageActionRow, MessageEmbed } from "discord.js"
 import splitNoButton from "../buttons/splitNoButton"
 import splitYesButton from "../buttons/splitYesButton"
-import { WAGER, KNEE, HALFLING1, HALFLING2, PLAYER } from '../utils/constants'
+import { WAGER, KNEE, HALFLING1, HALFLING2 } from '../utils/constants'
 import { delay } from "./util"
 
 const DELAY = 2000
@@ -68,11 +68,11 @@ export const processRound = async (interaction: CommandInteraction | ButtonInter
     await delay(DELAY)
     
     const embeddedResponse = new MessageEmbed()
+        .setColor(result.payout < 0 ? "RED" : "GREEN")
         .setTitle(`The halflings roll ${halfling1} and ${halfling2}!`)
         .setDescription(descriptionText)
         .addField('Result', result.responseFollowup ? 'Split' : payoutText)
         .addFields(
-            { name: PLAYER, value: player},
             { name: WAGER, value: wager.toString() },
             { name: KNEE, value: knee.toString(), inline: true },
             { name: HALFLING1, value: halfling1.toString(), inline: true },
@@ -80,6 +80,7 @@ export const processRound = async (interaction: CommandInteraction | ButtonInter
         )
 
     await interaction.followUp({
+        content: player,
         embeds: [embeddedResponse],
         components: result.responseFollowup ? [splitRow] : undefined
     })
