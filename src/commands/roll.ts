@@ -20,13 +20,14 @@ const execute = async (interaction: CommandInteraction) => {
         results.push(rollDie(numberOfSides))
     }
 
-    const sum = results.reduce((x1, x2) => x1 + x2) + (bonusModifier ?? 0)
+    const subTotal = results.reduce((x1, x2) => x1 + x2)
+    const total = subTotal + (bonusModifier ?? 0)
     const bonusTitleText = bonusModifier ? ` + ${bonusModifier} ` : ''
-    const bonusDescText = bonusModifier ? ` (${sum} + ${bonusModifier})` : ''
+    const bonusDescText = bonusModifier ? ` (${subTotal} + ${bonusModifier})` : ''
     
     const embeddedResponse = new MessageEmbed()
         .setTitle(`Rolling ${numberOfDice}d${numberOfSides}${bonusTitleText}${labelText}`)
-        .setDescription(`${sum}${bonusDescText}`)
+        .setDescription(`${total}${bonusDescText}`)
 
     if (numberOfDice > 1) {
         embeddedResponse.addField('Rolls', results.join(', '), true)

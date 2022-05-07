@@ -5,7 +5,8 @@
   "main": "./src/index.ts",
   "scripts": {
     "deploy-test": "ts-node ./scripts/deploy-commands.js test",
-    "deploy-prod": "ts-node ./scripts/deploy-commands.js prod",
+    "deploy": "ts-node ./scripts/deploy-commands.js prod",
+    "start-test": "ts-node .",
     "start": "ts-node . > out.log 2> error.log",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
