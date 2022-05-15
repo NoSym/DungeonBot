@@ -1,8 +1,9 @@
 import { Awaitable, CommandInteraction } from 'discord.js';
-import { SlashCommandBuilder } from '@discordjs/builders';
+import { SlashCommandBuilder, SlashCommandSubcommandsOnlyBuilder } from '@discordjs/builders';
 
 export type CustomCommand = {
-    data: Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">
+    data: Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup"> 
+        | SlashCommandSubcommandsOnlyBuilder
     enabled: boolean
     execute(interaction: CommandInteraction): Awaitable<void>
 }
