@@ -6,8 +6,9 @@
   "scripts": {
     "deploy-test": "ts-node ./scripts/deploy-commands.js test",
     "deploy": "ts-node ./scripts/deploy-commands.js prod",
+    "fetch-campaign": "ts-node ./scripts/fetch-campaign.mjs",
     "start-test": "ts-node .",
-    "start": "ts-node . > out.log 2> error.log",
+    "start": "ts-node . > logs/out.log 2> logs/error.log",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -17,7 +18,8 @@
     "@discordjs/rest": "^0.3.0",
     "discord-api-types": "^0.31.0",
     "discord.js": "^13.6.0",
-    "dotenv": "^16.0.0"
+    "dotenv": "^16.0.0",
+    "firebase": "^9.8.1"
   },
   "devDependencies": {
     "@types/node": "^17.0.23",

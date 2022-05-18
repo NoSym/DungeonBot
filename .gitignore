@@ -1,5 +1,7 @@
 .env
+fetch-campaign.mjs
+
+data/
+logs/
 node_modules/
 prod/
-data/
-*.log
