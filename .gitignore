@@ -3,5 +3,6 @@ fetch-campaign.mjs
 
 data/
 logs/
+src/markdown/items/
 node_modules/
 prod/

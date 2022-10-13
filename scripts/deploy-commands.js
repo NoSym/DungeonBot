@@ -11,6 +11,8 @@ dotenv.config()
 const commands = []
 const commandFiles = fs.readdirSync(`${__dirname}/../src/commands`).filter((file) => file.endsWith('.ts'))
 const environment = process.argv.length > 2 ? process.argv[2] : ENV_TEST
+const clientId = environment === ENV_PROD ? process.env.DISCORD_CLIENT_ID : process.env.DISCORD_CLIENT_ID_TEST
+const token = environment === ENV_PROD ? process.env.DISCORD_TOKEN : process.env.DISCORD_TOKEN_TEST
 
 console.log('Registering commands...')
 
@@ -27,14 +29,14 @@ for (const file of commandFiles) {
     }
 }
 
-const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN)
+const rest = new REST({ version: '9' }).setToken(token)
 
 if (environment === ENV_TEST) {
-    rest.put(Routes.applicationGuildCommands(process.env.DISCORD_CLIENT_ID, process.env.TEST_GUILD_ID), { body: commands })
+    rest.put(Routes.applicationGuildCommands(clientId, process.env.TEST_GUILD_ID), { body: commands })
     .then(() => console.log('Successfully registered guild application commands.'))
     .catch(console.error)
 } else if (environment === ENV_PROD) {
-    rest.put(Routes.applicationCommands(process.env.DISCORD_CLIENT_ID), { body: commands })
+    rest.put(Routes.applicationCommands(clientId), { body: commands })
     .then(() => console.log('Successfully registered global application commands.'))
     .catch(console.error)
 }

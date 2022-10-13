@@ -67,6 +67,25 @@ export const getPlayerMappings = (): Map<string, string> => {
     }
 }
 
+export const parseImageFromMarkdown = (markdown: string) => {
+    const imagePattern = /!\[[^\]]*\]\((?<src>.*?)(?=\"|\))(?<optionalpart>\".*\")?\)/
+    const match = markdown.match(imagePattern)
+
+    if (!match || !match.groups || !match.index) {
+        return {
+            imgSrc: "",
+            markdown: markdown
+        }
+    }
+
+    const editedMarkdown = markdown.substring(0, match.index) + markdown.substring(match.index + match[0].length)
+
+    return {
+        imgSrc: match.groups.src,
+        markdown: editedMarkdown
+    }
+}
+
 export const setPlayerMappings = (mappings: Map<string, string>) => {
     const path = `${__dirname}/../../data/player_mappings.json`
     const jsonMap: any = {}

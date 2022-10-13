@@ -1,7 +1,7 @@
 import { MessageEmbed, MessageSelectMenu, SelectMenuInteraction } from 'discord.js'
 import fs from 'fs'
-import { CustomClient } from '../classes/CustomClient'
 import { SelectMenu } from '../types/SelectMenu'
+import { parseImageFromMarkdown } from '../utils/util'
 
 const name = 'itemMenu'
 const getMenu = () => {
@@ -24,14 +24,14 @@ const getMenu = () => {
     return menu
 }
 const handleSelection = async (interaction: SelectMenuInteraction) => {
-    const client = interaction.client as CustomClient
-    
     const itemName = interaction.values[0]
     const itemPath = `${__dirname}/../markdown/items/${itemName}.md`
     const itemText = fs.existsSync(itemPath) ? fs.readFileSync(itemPath, 'utf8') : `There is no information on ${itemName}...`
+    const parsedMarkdown = parseImageFromMarkdown(itemText)
 
     const embeddedResponse = new MessageEmbed()
-        .setDescription(itemText)
+        .setDescription(parsedMarkdown?.markdown)
+        .setImage(parsedMarkdown?.imgSrc)
 
     interaction.reply({ embeds: [embeddedResponse] })
 }
