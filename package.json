@@ -7,8 +7,8 @@
     "deploy-test": "ts-node ./scripts/deploy-commands.js test",
     "deploy": "ts-node ./scripts/deploy-commands.js prod",
     "fetch-campaign": "ts-node ./scripts/fetch-campaign.mjs",
-    "start-test": "ts-node .",
-    "start": "ts-node . > logs/out.log 2> logs/error.log",
+    "start-test": "ts-node . test",
+    "start": "ts-node . prod > logs/out.log 2> logs/error.log",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
