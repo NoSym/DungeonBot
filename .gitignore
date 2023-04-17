@@ -1,5 +1,5 @@
 .env
-fetch-campaign.mjs
+*.mjs
 
 data/
 logs/
